@@ -35,18 +35,6 @@
       "content": "another thing",
       "author": "me again",
       "id": 6
-    },
-    {
-      "title": "thing 1",
-      "content": "11111111111",
-      "author": "1",
-      "id": 7
-    },
-    {
-      "title": "thing 2",
-      "content": "22222222222",
-      "author": "2",
-      "id": 8
     }
   ]
 }

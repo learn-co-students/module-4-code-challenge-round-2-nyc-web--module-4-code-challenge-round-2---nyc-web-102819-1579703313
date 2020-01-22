@@ -2,13 +2,15 @@ import React from "react";
 import "./App.css";
 import PoemsContainer from "./PoemsContainer";
 import NewPoemForm from "./NewPoemForm";
+import PoemsFavorites from "./PoemsFavorites";
 
 class App extends React.Component {
   state = {
     allPoems: [],
+    favoritePoems: [],
     formShow: false,
     formTitle: '',
-    formAuthor: '',
+    formAuthor: '', 
     formContent: ''
   }
 
@@ -57,6 +59,27 @@ class App extends React.Component {
     })
   }
 
+  addFavoriteBtn = (poem) => {
+    console.log("adding to favs")
+    this.setState({favoritePoems: [...this.state.favoritePoems, poem]})
+  }
+
+  deletePoem = (id) => {
+    console.log(id)
+    fetch(`http://localhost:3000/poems/${id}`, {
+      method: "DELETE",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(resp => resp.json())
+    .then(resp => {
+      console.log(resp)
+      //still need to update state
+    })
+  }
+
   render() {
     return (
       <div className="app">
@@ -80,6 +103,12 @@ class App extends React.Component {
         </div>
         <PoemsContainer 
           allPoems={this.state.allPoems}
+          addFavoriteBtn={this.addFavoriteBtn}
+          deletePoem={this.deletePoem}
+        />
+        <PoemsFavorites
+          favoritePoems={this.state.favoritePoems}
+          deletePoem={this.deletePoem}
         />
       </div>
     );
