@@ -20,7 +20,7 @@ class Poem extends React.Component {
         <p>
           <strong>- {/*By Author*/}{this.props.poem.author}</strong>
         </p>
-        <button onClick={this.handleClick}>{/*Mark as read*/}{this.state.readButtom ? "Mark as read" : "Mark as unread"}</button>
+        <button onClick={this.handleClick} style={{backgroundColor: (this.state.readButtom ? null : 'green')}}>{/*Mark as read*/}{this.state.readButtom ? "Mark as read" : "Mark as unread"}</button>
       </div>
     );
   }
