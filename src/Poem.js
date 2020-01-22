@@ -16,6 +16,13 @@ class Poem extends React.Component {
     }
   }
 
+  unrenderDelete = () => {
+    this.props.poemDelete(this.props.poem)
+    fetch(`http://localhost:3000/poems/${this.props.poem.id}`, {
+      method: "DELETE"
+    })
+  }
+
   render() {
     return (
       <div>
@@ -25,6 +32,8 @@ class Poem extends React.Component {
         <strong>{this.props.poem.author}</strong>
         </p>
         <button style={{backgroundColor: `${this.state.buttonStyle}`}} onClick={this.buttonChanger}>{this.state.buttonInfo}</button>
+        {this.props.addToFavorite ? <button onClick={() => {this.props.addToFavorite(this.props.poem)}} style={{backgroundColor: "white"}}>Favorite this Poem</button> : null}
+        <button onClick={this.unrenderDelete} style={{backgroundColor: "white"}}>Delete Poem</button>
       </div>
     );
   }

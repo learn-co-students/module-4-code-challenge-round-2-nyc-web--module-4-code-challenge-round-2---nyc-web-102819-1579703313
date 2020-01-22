@@ -7,6 +7,7 @@ class App extends React.Component {
 
   state = {
     poems: [],
+    favoritepoems: [],
     showForm: false
   }
 
@@ -21,7 +22,17 @@ class App extends React.Component {
   }
 
   poemStateChange = (poem) => {
-    this.setState({poems: [...this.state.poems, poem]})
+    this.setState({poems: [...this.state.poems, poem], showForm: false})
+  }
+
+  addToFavorite = (poem) => {
+    this.setState({favoritepoems: [...this.state.favoritepoems, poem]})
+  }
+
+  poemDelete = (poem) => {
+    let filteredPoems = this.state.poems.filter((poeminState) => {return poeminState.id !== poem.id})
+    let filteredFavorites = this.state.favoritepoems.filter((poeminState) => {return poeminState.id !== poem.id})
+    this.setState({poems: filteredPoems, favoritepoems: filteredFavorites})
   }
 
   render() {
@@ -31,7 +42,8 @@ class App extends React.Component {
           <button onClick={this.showForm}>Show/hide new poem form</button>
           {this.state.showForm && <NewPoemForm poemStateChange={this.poemStateChange} />}
         </div>
-        <PoemsContainer poems={this.state.poems} />
+        <PoemsContainer poems={this.state.poems} addToFavorite={this.addToFavorite} poemDelete={this.poemDelete}/>
+        <PoemsContainer poems={this.state.favoritepoems} poemDelete={this.poemDelete}/>
       </div>
     );
   }
