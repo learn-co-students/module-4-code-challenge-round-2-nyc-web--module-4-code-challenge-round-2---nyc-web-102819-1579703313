@@ -11,6 +11,7 @@ class App extends React.Component {
   state = {
     poemsArray: [],
     // readButtom: true
+    poemForm: false
   }
 
   componentDidMount() {
@@ -24,6 +25,10 @@ class App extends React.Component {
   //   // console.log('clicked')
   // }
 
+  poemFormButton = () => {
+    this.setState({poemForm: !this.state.poemForm})
+  }
+
   render() {
 
     // console.log(this.state.poemsArray)
@@ -31,8 +36,8 @@ class App extends React.Component {
     return (
       <div className="app">
         <div className="sidebar">
-          <button>Show/hide new poem form</button>
-          {false && <NewPoemForm />}
+          <button onClick={this.poemFormButton}>Show/hide new poem form</button>
+          {/*false && <NewPoemForm />*/}{this.state.poemForm ? <NewPoemForm /> : null}
         </div>
         <PoemsContainer poemsArray={this.state.poemsArray} handleClick={this.handleClick} readButtom={this.state.readButtom}/>
       </div>
