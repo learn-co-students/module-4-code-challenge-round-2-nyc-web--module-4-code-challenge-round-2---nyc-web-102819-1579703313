@@ -4,14 +4,36 @@ import PoemsContainer from "./PoemsContainer";
 import NewPoemForm from "./NewPoemForm";
 
 class App extends React.Component {
+
+  state = {
+    poems: [],
+    form : false 
+  }
+
+  componentDidMount(){
+    fetch('http://localhost:3000/poems')
+    .then(resp => resp.json())
+    .then(k => this.setState({poems : k}))
+  }
+
+
+  handleClick = () => {
+    this.setState({form : !this.state.form})
+    console.log(this.state.form)
+  }
+
+  addPoem = (thing) => {
+    this.setState({poems : [...this.state.poems, thing]})
+  }
+
   render() {
     return (
       <div className="app">
         <div className="sidebar">
-          <button>Show/hide new poem form</button>
-          {false && <NewPoemForm />}
+          <button onClick = {this.handleClick}>Show/hide new poem form</button>
+          {this.state.form && <NewPoemForm poems = {this.state.poems} addPoem = {this.addPoem} />}
         </div>
-        <PoemsContainer />
+        <PoemsContainer poems = {this.state.poems} />
       </div>
     );
   }
