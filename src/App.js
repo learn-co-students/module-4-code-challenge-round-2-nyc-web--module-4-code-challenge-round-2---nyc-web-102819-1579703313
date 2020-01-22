@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import PoemsContainer from "./PoemsContainer";
 import NewPoemForm from "./NewPoemForm";
+import FavoriteContainer from "./FavoriteContainer"
 
 class App extends React.Component {
 
@@ -11,7 +12,8 @@ class App extends React.Component {
     formShowing: false,
     title: '',
     content: '',
-    author: ''
+    author: '',
+    favorites: []
   }
 
   componentDidMount(){
@@ -35,6 +37,13 @@ class App extends React.Component {
       [e.target.name] : e.target.value
     })
   }
+
+  addToFavorites=(poem)=>{
+    this.setState({
+      favorites: [...this.state.favorites, poem]
+    },()=> console.log(this.state.favorites))
+  }
+
 
   handleSubmit=(e)=>{
     e.preventDefault()
@@ -60,6 +69,18 @@ class App extends React.Component {
       title: '',
       content: '',
       author: ''
+    })
+  }
+
+  deletePoem=(deletePoem)=>{
+    fetch(`http://localhost:3000/poems/${deletePoem.id}`,{
+      method : "Delete"
+    })
+    let newArray = [...this.state.poems]
+    let item = newArray.find(poem => poem.id == deletePoem.id)
+    newArray.splice(item, 1)
+    this.setState({
+      poems: newArray
     })
   }
 
@@ -89,6 +110,11 @@ class App extends React.Component {
         </div>
         <PoemsContainer 
           poems={this.state.poems}
+          addToFavorites={this.addToFavorites}
+          deletePoem = {this.deletePoem}
+        />
+        <FavoriteContainer
+          favorites={this.state.favorites}
         />
       </div>
     );

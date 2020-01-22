@@ -3,7 +3,7 @@ import React from "react";
 class Poem extends React.Component {
 
   state={
-    read: false
+    read: false,
   }
 
   markAsRead=()=>{
@@ -11,6 +11,7 @@ class Poem extends React.Component {
       read: !this.state.read
     })
   }
+
 
 
   render() {
@@ -22,6 +23,8 @@ class Poem extends React.Component {
           <strong>- By {this.props.poem.author}</strong>
         </p>
         <button onClick={this.markAsRead}>{this.state.read ? "Mark as Unread": "Mark as Read"}</button>
+        <button onClick={()=>this.props.addToFavorites(this.props.poem)}>Like</button>
+        <button onClick={()=>this.props.deletePoem(this.props.poem)}>Delete</button>
       </div>
     );
   }

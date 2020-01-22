@@ -3,7 +3,7 @@ import Poem from "./Poem";
 
 class PoemsContainer extends React.Component {
   render() {
-    console.log(this.props.poems)
+    
     return (
       <div className="poems-container">
         {
@@ -12,6 +12,8 @@ class PoemsContainer extends React.Component {
               <Poem
                 key={poem.id}
                 poem={poem}
+                addToFavorites= {this.props.addToFavorites}
+                deletePoem={this.props.deletePoem}
               />
             )
           })
