@@ -6,9 +6,8 @@ class Poem extends React.Component {
     read : false
   }
 
-  handleClick = () =>{
+  handleClick = () => {
     this.setState({read: !this.state.read})
-
   }
 
 
@@ -21,6 +20,8 @@ class Poem extends React.Component {
           <strong>- {this.props.author}</strong>
         </p>
         <button onClick = {this.handleClick}>{this.state.read? "Mark as unread": "Mark as read"} </button>
+        <button onClick = {(props) => this.props.handleLike(this.props)}>Like Poem</button>
+        <button onClick = {(props) => this.props.handleDelete(this.props)}>Delete Poem</button>
       </div>
     );
   }
