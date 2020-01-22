@@ -17,7 +17,7 @@ class App extends React.Component {
     .then(o => {this.setState({poems: o})})
   }
 
-  showForm = () => {
+  toggleForm = () => {
     this.setState({showForm: !this.state.showForm})
   }
 
@@ -39,11 +39,11 @@ class App extends React.Component {
     return (
       <div className="app">
         <div className="sidebar">
-          <button onClick={this.showForm}>Show/hide new poem form</button>
+          <button onClick={this.toggleForm}>Show/hide new poem form</button>
           {this.state.showForm && <NewPoemForm poemStateChange={this.poemStateChange} />}
         </div>
         <PoemsContainer poems={this.state.poems} addToFavorite={this.addToFavorite} poemDelete={this.poemDelete}/>
-        <PoemsContainer poems={this.state.favoritepoems} poemDelete={this.poemDelete}/>
+        <PoemsContainer poems={this.state.favoritepoems} />
       </div>
     );
   }

@@ -8,7 +8,7 @@ class PoemsContainer extends React.Component {
         {this.props.addToFavorite ? <h1>All Poems:</h1>: <h1>Favorites:</h1>}
         {
           this.props.poems.map((poem) => {
-            return this.props.addToFavorite ? <Poem poem={poem} addToFavorite={this.props.addToFavorite} poemDelete={this.props.poemDelete}/> : <Poem poem={poem} poemDelete={this.props.poemDelete}/>
+            return this.props.addToFavorite ? <Poem poem={poem} addToFavorite={this.props.addToFavorite} poemDelete={this.props.poemDelete}/> : <Poem poem={poem} />
           })
         }
       </div>

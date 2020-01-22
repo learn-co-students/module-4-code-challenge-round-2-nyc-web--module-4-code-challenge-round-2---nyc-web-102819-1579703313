@@ -28,12 +28,9 @@ class Poem extends React.Component {
       <div>
         <h3>{this.props.poem.title}</h3>
         <p>{this.props.poem.content}</p>
-        <p>
-        <strong>{this.props.poem.author}</strong>
-        </p>
+        <p><strong>{this.props.poem.author}</strong></p>
         <button style={{backgroundColor: `${this.state.buttonStyle}`}} onClick={this.buttonChanger}>{this.state.buttonInfo}</button>
-        {this.props.addToFavorite ? <button onClick={() => {this.props.addToFavorite(this.props.poem)}} style={{backgroundColor: "white"}}>Favorite this Poem</button> : null}
-        <button onClick={this.unrenderDelete} style={{backgroundColor: "white"}}>Delete Poem</button>
+        {this.props.addToFavorite ? <span><button onClick={() => {this.props.addToFavorite(this.props.poem)}} style={{backgroundColor: "white"}}>Like</button><button onClick={this.unrenderDelete} style={{backgroundColor: "white"}}>Delete Poem</button></span> : null}
       </div>
     );
   }
