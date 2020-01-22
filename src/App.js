@@ -82,7 +82,13 @@ class App extends React.Component {
     })
 
     this.setState({newPoem: iniNewPoem})
-    
+  }
+
+  deletePoem = (poemObj) => {
+    let index = poemObj.id
+    let array = this.state.poemsArray
+    array.splice(index, 1)
+    this.setState({poemsArray: array})
   }
 
   render() {
@@ -102,7 +108,7 @@ class App extends React.Component {
             /> 
             : null}
         </div>
-        <PoemsContainer poemsArray={this.state.poemsArray} handleClick={this.handleClick} readButtom={this.state.readButtom}/>
+        <PoemsContainer poemsArray={this.state.poemsArray} handleClick={this.handleClick} readButtom={this.state.readButtom} deletePoem={this.deletePoem}/>
       </div>
     );
 
