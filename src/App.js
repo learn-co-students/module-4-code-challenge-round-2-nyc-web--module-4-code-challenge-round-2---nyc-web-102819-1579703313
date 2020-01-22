@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import PoemsContainer from "./PoemsContainer";
 import NewPoemForm from "./NewPoemForm";
+import FavoritesContainer from "./FavoritesContainer";
 
 class App extends React.Component {
 
@@ -10,7 +11,8 @@ state ={
   showClick : false,
   Title : '',
   Author : '',
-  Content : ''
+  Content : '',
+  favpoems : []
 }
 
 handleSubmit= (e) => {
@@ -44,6 +46,13 @@ showClick = () => {
   this.setState({showClick: !this.state.showClick})
 }
 
+favClick = (fav) => {
+  console.log(fav.target) // this returns the button but I need the whole poem.. ffff (gotta figure out this.)
+  
+  // this.setState({favpoems : [...this.state.favpoems, fav]})
+  // console.log(this.state.favpoems)
+}
+
   render() {
     return (
       <div className="app">
@@ -51,7 +60,10 @@ showClick = () => {
           <button onClick={this.showClick}>Show/hide new poem form</button>
           {this.state.showClick && <NewPoemForm handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>}
         </div>
-        <PoemsContainer poem={this.state.poems} />
+        <PoemsContainer poem={this.state.poems} favClick={this.favClick} />
+        <FavoritesContainer poem={this.state.favpoems} />
+
+        
       </div>
     );
   }
