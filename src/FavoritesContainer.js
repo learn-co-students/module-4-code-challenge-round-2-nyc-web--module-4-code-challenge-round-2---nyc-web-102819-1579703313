@@ -1,17 +1,18 @@
 import React from "react";
 import Poem from "./Poem";
 
-class PoemsContainer extends React.Component {
+class FavoritesContainer extends React.Component {
   render() {
     return (
       <div className="poems-container">
-        {this.props.allPoems.map(poem => <Poem 
+        <h1>Favorites Container over here! </h1>
+        {this.props.likedPoems.map(poem => <Poem 
           poem={poem}
           key={poem.id}
           title={poem.title}
           content={poem.content}
           author={poem.author}
-          deletePoem={this.props.deletePoem}
+          likedPoems={this.props.likedPoems}
           likePoem={this.props.likePoem}
         />)
         }
@@ -20,4 +21,4 @@ class PoemsContainer extends React.Component {
   }
 }
 
-export default PoemsContainer;
+export default FavoritesContainer;
